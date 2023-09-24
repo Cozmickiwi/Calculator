@@ -27,6 +27,7 @@ function buttonDetect(a) {
         if(String(screenContent).length < 11){
             console.log("Here!")
             if(a == '⌫'){
+                if(mainScreen.textContent == '0') return('')
                 if (screenContent.length == 1){
                     screenContent = "";
                     mainScreen.textContent = "0";
@@ -81,7 +82,7 @@ function maths(operator){
     if(upperScreenContent.length == 0){
         //convert chosen operater symbol to js math operator
         if(operator == "=" && upperScreenContent == "") return('');
-        if(operater == '/'){
+        if(operator == '/' || operator == '÷'){
             upperScreen.textContent = (screenContent + " " + "÷");
         }
         else {
@@ -121,7 +122,7 @@ function calculate(){
         return notationCalc(output.toFixed());
     }
     if (String(output).length > 10){
-        output = output.toFixed((String(output).length - 10));
+        output = output.toFixed((String(output).length - 12));
     }
     operater = chosenOperator;
     if (operater == "=" || equ == true){
@@ -175,3 +176,26 @@ let buttonAsign = buttonList.map(item => {
         buttonDetect(element.innerText);
     })
 })
+
+
+//keyboard support "will be long but idk how else"
+const supportedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '/', '+', '-', '=', '%', 'x', '*', '.', 'Backspace', 'Escape']
+let keyPress;
+document.addEventListener('keydown', keyPressed);
+function keyPressed(e){
+    if(supportedKeys.includes(e.key)){
+        if(e.key == '*'){
+            return(buttonDetect('x'));
+        }
+        else if(e.key == '/'){
+            return(buttonDetect('%'));
+        }
+        else if(e.key == 'Backspace'){
+            return(buttonDetect('⌫'));
+        }
+        else if(e.key == 'Escape'){
+            return(buttonDetect('AC'));
+        }
+        buttonDetect(e.key);
+    }
+}
