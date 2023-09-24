@@ -11,8 +11,8 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #8deaf6;
-    height: 60vh;
-    width: 350px;
+    height: 60%;
+    width: 30%;
     margin: auto;
     border: 3px solid black;
     border-radius: 10px;
@@ -24,7 +24,7 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 10%;
-    margin-bottom: 10%;
+    margin-bottom: 7%;
     border: 2px solid black;
     border-radius: 3px;
     padding-top: 3%;
@@ -56,20 +56,36 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
-    justify-content: space-between;
+    justify-content: center;
+    align-content: center;
     padding-left: 5%;
     padding-right: 5%;
+    padding-bottom: 2%;
+    padding-top: 1%;
 }
 .button {
-    align-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     width: 22%;
     height: 16%;
     background-color: #DAF5F0;
     border-radius: 25%;
     border: 1px solid black;
     box-shadow: 1px 1px #4e4e4e;
+    transition: 50ms;
+    margin: 3px;
+    flex-shrink: 2;
 }
 h3{
-    margin-top: 17%;
+    margin-top: 0%;
     margin-bottom: 0%;
+}
+
+.clicked {
+    transform: scale(0.985);
+    background-color: #c3e1db;
+    box-shadow: rgb(0, 0, 0) 1px 1px 0px inset, rgba(188, 212, 212, 0.5) -3px -3px 6px 1px inset;
+    border: 1px solid rgb(143, 143, 143);
 }

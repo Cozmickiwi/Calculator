@@ -20,6 +20,10 @@ function buttonDetect(a) {
         console.log(screenContent);
     }
 };
+function removeTransition(e){
+    if(e.propertyName !== 'transform') return;
+    e.target.classList.remove('clicked');
+}
 //make function which adds previous main screen content to top of screen if upperscreen is empty
 //then after next user input, calculates answer and adds to main screen
 
@@ -41,7 +45,9 @@ let buttonList = arr.map(item => item.id);
 let buttonAsign = buttonList.map(item => {
     id = item;
     let element = document.getElementById(id);
+    element.addEventListener('transitionend', removeTransition)
     element.addEventListener('click', function(){
+        element.classList.add('clicked');
         buttonDetect(element.innerText);
     })
 })
