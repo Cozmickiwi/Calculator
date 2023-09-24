@@ -3,20 +3,29 @@ let screen = document.getElementById('screen');
 let mainScreen = document.getElementById('mainScreen');
 let upperScreen = document.getElementById('topScreen');
 let button = document.querySelectorAll(".button");
+let calcContainer = document.querySelector(".calculatorContainer");
 let id;
 let screenContent = "";
 let upperScreenContent = "";
+let operater;
 let chosenOperator = "";
 let output;
+let ans = false;
+let equ = false;
+let decimal = false;
 //function that takes in the value of clicked button and adds to screen
 //if operator is clicked, returns to math function
 function buttonDetect(a) {
+    console.log(a);
+    console.log(screenContent);
     if(screenContent.length > 0 || a != 0){
         if(a == 'AC' || a == '%' || a == '÷' || a == 'x' 
         || a == '-' || a == '+' || a == '='){
             return maths(a);
         }
-        if(screenContent.length < 11){
+        console.log(String(screenContent).length);
+        if(String(screenContent).length < 11){
+            console.log("Here!")
             if(a == '⌫'){
                 if (screenContent.length == 1){
                     screenContent = "";
@@ -29,7 +38,14 @@ function buttonDetect(a) {
                 console.log(screenContent);
                 return('');
             }
-            screenContent += a;
+            console.log(screenContent)
+            if (a == "." && decimal == false){
+                 screenContent += a;
+                 decimal = true;
+            }
+            else if (a != ".") {
+            screenContent += Number(a);
+            }
             mainScreen.textContent = screenContent;
             console.log(screenContent);
         }
@@ -43,6 +59,8 @@ function removeTransition(e){
 //then after next user input, calculates answer and adds to main screen
 
 function maths(operator){
+    decimal = false;
+    console.log(operator);
     if(operator == 'x'){
         chosenOperator = '*';
     }
@@ -56,47 +74,92 @@ function maths(operator){
         upperScreen.textContent = "~";
         return('');
     }
-    else if (operator != '='){
+    else if (operator != "="){
         chosenOperator = operator;
     }
+    else if(operator == "=") equ = true;
     if(upperScreenContent.length == 0){
         //convert chosen operater symbol to js math operator
-        if(operator == "=") return('');
-        upperScreen.textContent = (screenContent + " " + operator);
+        if(operator == "=" && upperScreenContent == "") return('');
+        if(operater == '/'){
+            upperScreen.textContent = (screenContent + " " + "÷");
+        }
+        else {
+            upperScreen.textContent = (screenContent + " " + operator);
+        }
         upperScreenContent = screenContent;
         mainScreen.textContent = '0';
-        screenContent = "";
+        screenContent = '';
+        operater = chosenOperator;
     }
-    else if(upperScreenContent.length > 0){
+    else if(String(upperScreenContent).length > 0){
         return calculate()
     }
 }
 function calculate(){
-    if(chosenOperator == "+"){
+    if(operater == "+"){
         output = (Number(upperScreenContent) + Number(screenContent));
         console.log(output);
     }
-    else if(chosenOperator == "-"){
+    else if(operater == "-"){
         output = (Number(upperScreenContent) - Number(screenContent));
         console.log(output);
     }
-    else if(chosenOperator == "*"){
+    else if(operater == "*"){
         output = ((Number(upperScreenContent)) * (Number(screenContent)));
         console.log(output);
     }
-    else if(chosenOperator == "/"){
+    else if(operater == "/"){
         output = (Number(upperScreenContent) / Number(screenContent));
         console.log(output);
     }
-    else if(chosenOperator == "%"){
-        output = (((Number(upperScreenContent) / Number(screenContent)) * 100) + "%");
+    else if(operater == "%"){
+        output = ((Number(upperScreenContent) / Number(screenContent)) * 100);
         console.log(output);
     }
-    screenContent = output;
-    upperScreenContent = "~";
-    mainScreen.textContent = screenContent;
-    upperScreen.textContent = upperScreenContent;
+    if ((output.toFixed()) > 999999999999 && output != Infinity){
+        return notationCalc(output.toFixed());
+    }
+    if (String(output).length > 10){
+        output = output.toFixed((String(output).length - 10));
+    }
+    operater = chosenOperator;
+    if (operater == "=" || equ == true){
+        //if(upperScreenContent == "~") return('');
+        screenContent = output;
+        upperScreenContent = "";
+        mainScreen.textContent = screenContent;
+        upperScreen.textContent = "~";
+        equ = false;
+        decimal = false;
+    }
+    else {
+        console.log(output);
+        upperScreenContent = String(output);
+        screenContent = "";
+        console.log('hi');
+        mainScreen.textContent = '0';
+        upperScreen.textContent = (upperScreenContent + chosenOperator);
+        decimal = false;
+    }
 }
+function notationCalc(num){
+    let start = "1";
+    for(let i = 1; i < num.length; i++){
+        start += "0"
+    }
+    let outputDivider = Number(start);
+    let outputFloat = (num / outputDivider)
+    if(outputFloat.toFixed(5) == 10) outputFloat -= 0.00001;
+    screenContent = (`${(outputFloat.toFixed(5))}e+${num.length - 1}`);
+    mainScreen.textContent = screenContent;
+    upperScreen.textContent = "~";
+    upperScreenContent = num;
+    console.log(upperScreenContent);
+    return('');
+}
+
+
 
 //convert nodelist of elements with id "button" to an array
 let arr = Array.from(button);
