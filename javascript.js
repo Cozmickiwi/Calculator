@@ -7,17 +7,32 @@ let id;
 let screenContent = "";
 let upperScreenContent = "";
 let chosenOperator = "";
+let output;
 //function that takes in the value of clicked button and adds to screen
 //if operator is clicked, returns to math function
 function buttonDetect(a) {
     if(screenContent.length > 0 || a != 0){
-        if(a == 'AC' || a == '⌫' || a == '%' || a == '÷' || a == 'x' 
+        if(a == 'AC' || a == '%' || a == '÷' || a == 'x' 
         || a == '-' || a == '+' || a == '='){
             return maths(a);
         }
-        screenContent += a;
-        mainScreen.textContent = screenContent;
-        console.log(screenContent);
+        if(screenContent.length < 11){
+            if(a == '⌫'){
+                if (screenContent.length == 1){
+                    screenContent = "";
+                    mainScreen.textContent = "0";
+                    return('');
+                }
+                let backSpace = screenContent.slice(0, -1);
+                screenContent = backSpace;
+                mainScreen.textContent = screenContent;
+                console.log(screenContent);
+                return('');
+            }
+            screenContent += a;
+            mainScreen.textContent = screenContent;
+            console.log(screenContent);
+        }
     }
 };
 function removeTransition(e){
@@ -28,13 +43,59 @@ function removeTransition(e){
 //then after next user input, calculates answer and adds to main screen
 
 function maths(operator){
-    if(upperScreenContent.length == 0){
+    if(operator == 'x'){
+        chosenOperator = '*';
+    }
+    else if(operator == '÷'){
+        chosenOperator = '/';
+    }
+    else if (operator == 'AC'){
+        screenContent = "";
+        upperScreenContent = "";
+        mainScreen.textContent = "0";
+        upperScreen.textContent = "~";
+        return('');
+    }
+    else if (operator != '='){
         chosenOperator = operator;
+    }
+    if(upperScreenContent.length == 0){
+        //convert chosen operater symbol to js math operator
+        if(operator == "=") return('');
         upperScreen.textContent = (screenContent + " " + operator);
         upperScreenContent = screenContent;
         mainScreen.textContent = '0';
         screenContent = "";
     }
+    else if(upperScreenContent.length > 0){
+        return calculate()
+    }
+}
+function calculate(){
+    if(chosenOperator == "+"){
+        output = (Number(upperScreenContent) + Number(screenContent));
+        console.log(output);
+    }
+    else if(chosenOperator == "-"){
+        output = (Number(upperScreenContent) - Number(screenContent));
+        console.log(output);
+    }
+    else if(chosenOperator == "*"){
+        output = ((Number(upperScreenContent)) * (Number(screenContent)));
+        console.log(output);
+    }
+    else if(chosenOperator == "/"){
+        output = (Number(upperScreenContent) / Number(screenContent));
+        console.log(output);
+    }
+    else if(chosenOperator == "%"){
+        output = (((Number(upperScreenContent) / Number(screenContent)) * 100) + "%");
+        console.log(output);
+    }
+    screenContent = output;
+    upperScreenContent = "~";
+    mainScreen.textContent = screenContent;
+    upperScreen.textContent = upperScreenContent;
 }
 
 //convert nodelist of elements with id "button" to an array
