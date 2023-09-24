@@ -77,6 +77,7 @@ body {
     transition: 50ms;
     margin: 3px;
     flex-shrink: 2;
+    user-select: none;
 }
 h3{
     margin-top: 0%;
@@ -85,7 +86,8 @@ h3{
 
 .clicked {
     transform: scale(0.985);
+    transform: translate(1px, 1px);
     background-color: #c3e1db;
-    box-shadow: rgb(0, 0, 0) 1px 1px 0px inset, rgba(188, 212, 212, 0.5) -3px -3px 6px 1px inset;
-    border: 1px solid rgb(143, 143, 143);
+    box-shadow: 0px 0px black;
+    border: 1px solid gray;
 }
