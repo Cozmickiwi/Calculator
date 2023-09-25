@@ -135,7 +135,7 @@ h3{
    animation-name: spinner; 
    animation-timing-function: linear; 
    animation-iteration-count: infinite; 
-   animation-duration: 1s; 
+   animation-duration: 2s; 
    -webkit-transform-style: preserve-3d; 
    -moz-transform-style: preserve-3d; 
    -ms-transform-style: preserve-3d; 
