@@ -16,16 +16,12 @@ let decimal = false;
 //function that takes in the value of clicked button and adds to screen
 //if operator is clicked, returns to math function
 function buttonDetect(a) {
-    console.log(a);
-    console.log(screenContent);
     if(screenContent.length > 0 || a != 0){
         if(a == 'AC' || a == '%' || a == '÷' || a == 'x' 
         || a == '-' || a == '+' || a == '='){
             return maths(a);
         }
-        console.log(String(screenContent).length);
         if(String(screenContent).length < 11){
-            console.log("Here!")
             if(a == '⌫'){
                 if(mainScreen.textContent == '0') return('')
                 if (screenContent.length == 1){
@@ -36,10 +32,8 @@ function buttonDetect(a) {
                 let backSpace = screenContent.slice(0, -1);
                 screenContent = backSpace;
                 mainScreen.textContent = screenContent;
-                console.log(screenContent);
                 return('');
             }
-            console.log(screenContent)
             if (a == "." && decimal == false){
                  screenContent += a;
                  decimal = true;
@@ -48,7 +42,6 @@ function buttonDetect(a) {
             screenContent += Number(a);
             }
             mainScreen.textContent = screenContent;
-            console.log(screenContent);
         }
     }
 };
@@ -100,23 +93,18 @@ function maths(operator){
 function calculate(){
     if(operater == "+"){
         output = (Number(upperScreenContent) + Number(screenContent));
-        console.log(output);
     }
     else if(operater == "-"){
         output = (Number(upperScreenContent) - Number(screenContent));
-        console.log(output);
     }
     else if(operater == "*"){
         output = ((Number(upperScreenContent)) * (Number(screenContent)));
-        console.log(output);
     }
     else if(operater == "/"){
         output = (Number(upperScreenContent) / Number(screenContent));
-        console.log(output);
     }
     else if(operater == "%"){
         output = ((Number(upperScreenContent) / Number(screenContent)) * 100);
-        console.log(output);
     }
     if ((output.toFixed()) > 999999999999 && output != Infinity){
         return notationCalc(output.toFixed());
@@ -135,10 +123,8 @@ function calculate(){
         decimal = false;
     }
     else {
-        console.log(output);
         upperScreenContent = String(output);
         screenContent = "";
-        console.log('hi');
         mainScreen.textContent = '0';
         upperScreen.textContent = (upperScreenContent + chosenOperator);
         decimal = false;
@@ -156,12 +142,8 @@ function notationCalc(num){
     mainScreen.textContent = screenContent;
     upperScreen.textContent = "~";
     upperScreenContent = num;
-    console.log(upperScreenContent);
     return('');
 }
-
-
-
 //convert nodelist of elements with id "button" to an array
 let arr = Array.from(button);
 //create new array from arr containing only the id of each button element
@@ -169,16 +151,13 @@ let buttonList = arr.map(item => item.id);
 //create event listener for each button, which sends the inner text to function
 let buttonAsign = buttonList.map(item => {
     id = item;
-    let element = document.getElementById(id);
-    element.addEventListener('transitionend', removeTransition)
+    let element = document.getElementById(id); element.addEventListener('transitionend', removeTransition)
     element.addEventListener('click', function(){
         element.classList.add('clicked');
         buttonDetect(element.innerText);
     })
 })
-
-
-//keyboard support "will be long but idk how else"
+//create event listeners for use with keyboard 
 const supportedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '/', '+', '-', '=', '%', 'x', '*', '.', 'Backspace', 'Escape']
 let keyPress;
 document.addEventListener('keydown', keyPressed);
