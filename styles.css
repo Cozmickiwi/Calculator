@@ -39,6 +39,7 @@ body {
         border: 3px solid black;
         border-radius: 10px;
         box-shadow: 4px 4px rgba(0, 0, 0, 0.749);
+        
     }
 }
 
@@ -123,9 +124,10 @@ h3{
     border-radius: 3px;
     width: inherit;
   }
-  
-  .github:hover {
-  
+
+    .github:hover,
+    .animation{
+ 
     -webkit-animation-name: spinner; 
    -webkit-animation-timing-function: linear; 
    -webkit-animation-iteration-count: infinite; 
@@ -138,7 +140,8 @@ h3{
    -moz-transform-style: preserve-3d; 
    -ms-transform-style: preserve-3d; 
    transform-style: preserve-3d;
-}
+    }
+
 
  /* WebKit and Opera browsers */ @-webkit-keyframes spinner { 
    from 
@@ -150,18 +153,36 @@ h3{
    } 
 } /* all other browsers */ 
 @keyframes spinner { 
-   from { 
-       -moz-transform: rotateY(0deg); 
-       -ms-transform: rotateY(0deg); 
-       transform: rotateY(0deg); 
+   0% { 
+       -moz-transform: rotateY(0deg) rotateX(0deg); 
+       -ms-transform: rotateY(0deg) rotateX(0deg); 
+       transform: rotateY(0deg) rotateX(0deg); 
    } 
-   to 
+   25%
    { 
-       -moz-transform: rotateY(-360deg); 
-       -ms-transform: rotateY(-360deg); 
-       transform: rotateY(-360deg); 
-   
+       -moz-transform: rotateY(-180deg) rotateX(-90deg); 
+       -ms-transform: rotateY(-180deg) rotateX(-90deg); 
+       transform: rotateY(-180deg) rotateX(-90deg); 
    } 
+   50%
+   { 
+    -moz-transform: rotateY(-390deg) rotateX(-200deg); 
+    -ms-transform: rotateY(-390deg) rotateX(-200deg); 
+    transform: rotateY(-390deg) rotateX(-200deg); 
+   } 
+   75% 
+   { 
+    -moz-transform: rotateY(-560deg) rotateX(-120deg); 
+    -ms-transform: rotateY(-560deg) rotateX(-120deg); 
+    transform: rotateY(-560deg) rotateX(-120deg); 
+    } 
+    100%
+    { 
+    -moz-transform: rotateY(-720deg) rotateX(0deg); 
+    -ms-transform: rotateY(-720deg) rotateX(0deg); 
+    transform: rotateY(-720deg) rotateX(0deg); 
+    } 
+
 }
 
 a {

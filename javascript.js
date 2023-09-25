@@ -4,6 +4,7 @@ let mainScreen = document.getElementById('mainScreen');
 let upperScreen = document.getElementById('topScreen');
 let button = document.querySelectorAll(".button");
 let calcContainer = document.querySelector(".calculatorContainer");
+let calculator = document.getElementById('calculator');
 let id;
 let screenContent = "";
 let upperScreenContent = "";
@@ -177,4 +178,13 @@ function keyPressed(e){
         }
         buttonDetect(e.key);
     }
+}
+let gitHub = document.querySelector('.github');
+gitHub.addEventListener('mouseover', function(){animate()})
+gitHub.addEventListener('mouseleave', function(){stopAnimate()})
+function animate() {
+    calculator.classList.add('animation');
+}
+function stopAnimate(){
+    calculator.classList.remove('animation');
 }
