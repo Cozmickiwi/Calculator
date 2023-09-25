@@ -1,13 +1,19 @@
 body {
     display: flex;
+    flex-direction: column;
     background-color: #e3dff2;
-    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
+    margin: 0px;
+
 }
 .calculatorContainer {
     display: flex;
     width: 99.3vw;
-    height: 95vh;
+    height: 90vh;
     align-items: center;
+    flex-grow: 1;
 }
 @media screen and (orientation: portrait) {
     #calculator {
@@ -107,4 +113,69 @@ h3{
     background-color: #c3e1db;
     box-shadow: inset .5px .5px 1px #778986ac;
     border: 1px solid gray;
+}
+
+.footer {
+    display: flex;
+    background-color: rgba(212, 209, 209, 0.623);
+    justify-content: center;
+    border: 1px solid rgba(184, 181, 181, 0.461);
+    border-radius: 3px;
+    width: inherit;
+  }
+  
+  .github:hover {
+  
+    -webkit-animation-name: spinner; 
+   -webkit-animation-timing-function: linear; 
+   -webkit-animation-iteration-count: infinite; 
+   -webkit-animation-duration: 2s; 
+   animation-name: spinner; 
+   animation-timing-function: linear; 
+   animation-iteration-count: infinite; 
+   animation-duration: .5s; 
+   -webkit-transform-style: preserve-3d; 
+   -moz-transform-style: preserve-3d; 
+   -ms-transform-style: preserve-3d; 
+   transform-style: preserve-3d;
+}
+
+ /* WebKit and Opera browsers */ @-webkit-keyframes spinner { 
+   from 
+   { 
+       -webkit-transform: rotateY(0deg); 
+   } 
+   to { 
+       -webkit-transform: rotateY(-360deg); 
+   } 
+} /* all other browsers */ 
+@keyframes spinner { 
+   from { 
+       -moz-transform: rotateY(0deg); 
+       -ms-transform: rotateY(0deg); 
+       transform: rotateY(0deg); 
+   } 
+   to 
+   { 
+       -moz-transform: rotateY(-360deg); 
+       -ms-transform: rotateY(-360deg); 
+       transform: rotateY(-360deg); 
+   
+   } 
+}
+
+a {
+    margin: 5px;
+    margin-right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:600;
+    text-decoration: none;
+    color: black;
+    font-size: x-small;
+}
+.footerContainer{
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 99.5vw;
 }
