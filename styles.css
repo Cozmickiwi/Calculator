@@ -145,11 +145,35 @@ h3{
 
  /* WebKit and Opera browsers */ @-webkit-keyframes spinner { 
    from 
-   { 
-       -webkit-transform: rotateY(0deg); 
+   0% { 
+       -moz-transform: rotateY(0deg) rotateX(0deg); 
+       -ms-transform: rotateY(0deg) rotateX(0deg); 
+       transform: rotateY(0deg) rotateX(0deg); 
    } 
-   to { 
-       -webkit-transform: rotateY(-360deg); 
+   25%
+   { 
+       -moz-transform: rotateY(-180deg) rotateX(-90deg); 
+       -ms-transform: rotateY(-180deg) rotateX(-90deg); 
+       transform: rotateY(-180deg) rotateX(-90deg); 
+   } 
+   50%
+   { 
+    -moz-transform: rotateY(-390deg) rotateX(-200deg); 
+    -ms-transform: rotateY(-390deg) rotateX(-200deg); 
+    transform: rotateY(-390deg) rotateX(-200deg); 
+   } 
+   75% 
+   { 
+    -moz-transform: rotateY(-560deg) rotateX(-120deg); 
+    -ms-transform: rotateY(-560deg) rotateX(-120deg); 
+    transform: rotateY(-560deg) rotateX(-120deg); 
+    } 
+    100%
+    { 
+    -moz-transform: rotateY(-720deg) rotateX(0deg); 
+    -ms-transform: rotateY(-720deg) rotateX(0deg); 
+    transform: rotateY(-720deg) rotateX(0deg); 
+    } 
    } 
 } /* all other browsers */ 
 @keyframes spinner { 
